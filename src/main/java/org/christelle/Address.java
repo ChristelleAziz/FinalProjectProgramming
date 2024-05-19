@@ -20,7 +20,38 @@ public class Address {
      * @return if it is valid or not
      */
     public static boolean isPostalCodeValid(String postalCode) {
-        //TODO : to be implemented
+        if (postalCode == null || postalCode.length() != 6 && postalCode.length() != 7) {
+            return false;
+        }
+
+        postalCode = postalCode.toLowerCase();
+
+        if (postalCode.length() == 6) {
+            for (int i = 0; i < postalCode.length(); i++) {
+                char c = postalCode.charAt(i);
+                if (i % 2 == 0 && !Character.isLetter(c)) {
+                    return false;
+                } else if (i % 2 != 0 && !Character.isDigit(c)) {
+                    return false;
+                }
+            }
+
+            return true;
+        } else if (postalCode.length() == 7) {
+            for (int i = 0; i < postalCode.length(); i++) {
+                char c = postalCode.charAt(i);
+                if (i == 3 && c != ' ') {
+                    return false;
+                } else if (i % 2 == 0 && !Character.isLetter(c)) {
+                    return false;
+                } else if (i % 2 != 0 && !Character.isDigit(c)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         return false;
     }
 
