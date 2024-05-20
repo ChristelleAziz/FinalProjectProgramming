@@ -17,13 +17,18 @@ public class Department {
      * @return if it is valid or nod
      */
     public static boolean validateDepartmentName(String departmentName) {
-        //TODO : to be implemented
-        return false;
+        for (char c : departmentName.toCharArray()) {
+            if (!Character.isLetter(c) && c != ' ') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public Department(String departmentId, String departmentName) {
         if (validateDepartmentName(departmentName)) {
-            this.departmentId = departmentId;
+            this.departmentId = "D" + departmentId;
             this.departmentName = departmentName;
         } else {
             this.departmentId = null;
