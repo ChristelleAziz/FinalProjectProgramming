@@ -1,11 +1,5 @@
 package org.christelle.util;
 
-// null -> null
-// "" -> ""
-// "hello" -> "Hello"
-// "hello world" -> "Hello World"
-// "hElLo wOrLd" -> "Hello World"
-// " hello world " -> "Hello World"
 public class Util {
     /**
      * converts each word in a string to title case
@@ -19,7 +13,6 @@ public class Util {
 
         String[] words = strIn.split(" ");
         if (words.length < 2) {
-            // If there are less than two words, return the original string
             return strIn;
         }
 
@@ -31,5 +24,4 @@ public class Util {
 
         return titleCaseFirstWord + " " + titleCaseSecondWord;
     }
-
 }
