@@ -17,10 +17,10 @@ public class Address {
     /**
      * Takes a postal code and checks if it is valid or not
      * @param postalCode the input postal code
-     * @return if it is valid or not
+     * @return if the postal code is valid or not
      */
     public static boolean isPostalCodeValid(String postalCode) {
-        if (postalCode == null || postalCode.length() != 6 && postalCode.length() != 7) {
+        if (postalCode == null || (postalCode.length() != 6 && postalCode.length() != 7)) {
             return false;
         }
 
@@ -35,20 +35,18 @@ public class Address {
                     return false;
                 }
             }
-
             return true;
         } else if (postalCode.length() == 7) {
             for (int i = 0; i < postalCode.length(); i++) {
                 char c = postalCode.charAt(i);
                 if (i == 3 && c != ' ') {
                     return false;
-                } else if (i % 2 == 0 && !Character.isLetter(c)) {
+                } else if (i != 3 && !Character.isLetter(c)) {
                     return false;
                 } else if (i % 2 != 0 && !Character.isDigit(c)) {
                     return false;
                 }
             }
-
             return true;
         }
 

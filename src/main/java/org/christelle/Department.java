@@ -1,6 +1,7 @@
 package org.christelle;
 
 import lombok.*;
+import org.christelle.util.Util;
 
 @ToString
 @EqualsAndHashCode
@@ -9,12 +10,12 @@ import lombok.*;
 public class Department {
     private String departmentId;
     private String departmentName;
-    private static int nextId;
+    private static int nextId = 1;
 
     /**
      * takes a department name and checks if it is valid or not
      * @param departmentName the input department name
-     * @return if it is valid or nod
+     * @return if the department name is valid or not
      */
     public static boolean validateDepartmentName(String departmentName) {
         for (char c : departmentName.toCharArray()) {
@@ -26,10 +27,10 @@ public class Department {
         return true;
     }
 
-    public Department(String departmentId, String departmentName) {
+    public Department(String departmentName) {
         if (validateDepartmentName(departmentName)) {
-            this.departmentId = "D" + departmentId;
-            this.departmentName = departmentName;
+            this.departmentId = "D" + String.format("%02d", nextId++);
+            this.departmentName = Util.toTitleCase(departmentName);
         } else {
             this.departmentId = null;
             this.departmentName = null;

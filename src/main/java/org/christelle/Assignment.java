@@ -1,8 +1,12 @@
 package org.christelle;
 
+import lombok.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Assignment {
     private String assignmentId;
     private String assignmentName;
@@ -11,6 +15,13 @@ public class Assignment {
     private double assignmentAverage;
     private ArrayList<Integer> scores;
     private static int nextId;
+
+    public Assignment(String assignmentName, double weight, int maxScore) {
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.maxScore = maxScore;
+        this.scores = new ArrayList<>();
+    }
 
     /**
      * calculates the average score for one assignment
@@ -25,7 +36,7 @@ public class Assignment {
         for (int score : scores) {
             sum += score;
         }
-        assignmentAverage = sum / scores.size();
+        this.assignmentAverage = sum / scores.size();
     }
 
     /***
@@ -37,7 +48,6 @@ public class Assignment {
         }
 
         Random rand = new Random();
-
         for (int i = 0; i < scores.size(); i++) {
             int section = rand.nextInt(0, 11);
             int score = switch (section) {
@@ -48,8 +58,7 @@ public class Assignment {
                 case 9, 10 -> rand.nextInt(90, 101);
                 default -> -1;
             };
-
-            scores.add(score);
+            scores.set(i, score);
         }
     }
 
@@ -61,5 +70,12 @@ public class Assignment {
                 ", weight=" + weight +
                 ", maxScore=" + maxScore +
                 '}';
+    }
+
+    /**
+     * adds the assignment
+     * @param assignment the input assignment
+     */
+    public void add(Object assignment) {
     }
 }
